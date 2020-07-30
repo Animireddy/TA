@@ -1,0 +1,128 @@
+#+TITLE:  TA PORTAL
+#+DATE: 29'th April,2017
+* TEAM MEMBERS: 
+- Animi Reddy Yannam(yannam.animireddy@students.iiit.ac.in)
+- Moneesh Shashank Mukkamala(shashank.m@students.iiit.ac.in)
+- Sowrya Deep Thayi(sowryadeep.thayi@students.iiit.ac.in)
+
+
+* Overview
+A simple web app for Electing the TA's using Flask and java script.
+
+
+* Goals
+To create a web app for Electing the TA's for multiple courses through Nominations.
+
+
+* Features
+- Students,Faculty and Admin are the types of users that exist each with their own profiles.
+- Students give their preferences for the TAship.
+- Faculty can Nominate them i.e refer them to the TA CHAIR.
+- Students can drop from their Nominations but gets fixed once they are Elected by TA ship.  
+- The students register filling in the forms their preferences for the TA ship.
+- The faculty then refers some students to the TA ship bt by Nominating them.
+- The TA CHAIR then Elects amoung them.
+
+
+* README
+** Getting Started
+
+- These instructions will get you to know how to run the project. 
+
+** Prerequisites
+
+Things you need to install the software and instructions to install them:
+
+- You should have python3 and pip3 installed:
+
+- First check if python3 is intstalled by using the command:
+#+BEGIN_SRC python
+  python3 -V
+#+END_SRC
+
+- Output:
+#+BEGIN_SRC 
+  Python 3.5.2
+#+END_SRC
+  
+- If not installed then type the following:
+#+BEGIN_SRC 
+  sudo apt-get update
+  sudo apt-get -y update
+#+END_SRC
+** Instructions for installing pip
+
+#+BEGIN_SRC 
+sudo apt-get install python3-pip
+
+#+END_SRC
+** Instructions for installing few more packages and development tools for the programming environment
+
+#+BEGIN_SRC 
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+#+END_SRC
+** Installing
+
+- Getting our web app up and running is simple. 
+- To run it you have to do what you do with most flask apps.
+  
+** Creating the initial database:
+#+BEGIN_SRC python 
+ python db_create.py
+ python db_migrate.py # In case you need to migrate the database
+#+END_SRC
+
+** Running the web app :
+#+BEGIN_SRC python 
+python run.py # The web app can be run in http://127.0.0.1:5000
+#+END_SRC
+
+** Built With
+
+- [[http://flask.pocoo.org/][Flask]] - The web framework used
+-JAVA SCRIPT USING API CALLS and using ajax. 
+
+
+* Flask
+It is a simple web app made using Flask web framework and java script to create a portal for the Election of TA's for the courses. Flask is called a micro framework because it does not require particular tools or libraries. 
+It has no database abstraction layer, form validation, or any other components where pre-existing third-party libraries provide common functions. 
+- Official *Flask documentation* [[http://flask.pocoo.org/docs/0.12/][here]].
+
+
+* How we started ..
+- First we started by building a database schema.
+- Then we started coding models and controllers for the respective models by taking use of the schema.
+- Then we built login.html which consists of all the pages where the required page is visible by using a tag called hidden.
+- First we coded controllers for users.
+- Then we coded controllers for login and register page.
+- Then we made profile pages for each of the users.
+- Then we added some integrity checks for the Students and TA CHAIR that is each student can be ELected for only one course and no two priorities of a student can be same.
+ 
+
+* Design
+
+-> NUMBER OF TYPES OF USERS:3
+   -STUDENTS    -FACULTY  -TA CHAIR
+- First the faculty of all the relevent courses are registered then the student wanting the nominations are registered.
+- Naturally the Admin will already be registered.
+- Students need to give their course priorities while registering where 'no two priorities are the same'.
+- The Faculty needs to write down the course Description i.e the details of what the course will be offering to the students who are gonna take the course for learning.
+- The faculty then Nominates the Students who they seem good for the TAship.
+- The TA CHAIR considers the Students who are Nominated by the Faculty and then Elect the TA's for the particular course.
+- The student can drop out from the Nominations if he wants to but once he has been Elected he Can't Drop out.
+- Checks->No Student can be the TA for two courses.
+- Once the students registers his preferences CANNOT be changed. 
+- Every Student has a STATUS bar which informs him if he has been Nominated or not and Elected or not.
+- STATUS --'Nominated'        - means the faculty has Nominated you and is refering you to the TA CHAIR who then considers you.
+         --'Selected'         - means you been elected as the TA for that particular course.
+         --'not yet nominated'- default status.
+         --'dropped'          - you have dropped out of the Nominations.
+
+
+* Security
+- Used SQLALCHEMY prevent SQL injection.
+- Used CSRF protction. 
+- The passowds are stored as hashes not in plain taxt,so even if our database is stolen by someone else he/she cannot get the password used for login
+  into our web app.
+ 
+

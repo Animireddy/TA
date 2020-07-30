@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<!--<link rel="stylesheet" type="text/css" href="common.css"/>-->
+	<style>
+	.hidden{
+	display: none;
+}
+	</style>
+</head>
+<body>
+<div id="loginform" class="hidden">
+<form>
+Email:<input type="email" id="email1" name="email" value=""><br/>
+Password:<input type="Password" id="pass1" name="password" value=""></br>
+<button type ="button" id="button1">Login</button>
+</form>
+<form>
+<button type="button" id="button2a">Register for Student</button>
+</form>
+<form>
+<button type="button" id="button2b">Register for Faculty</button>
+</form>
+</div>
+<div id="register_student" class="hidden">
+<form>
+Roll:<input type="text" name="roll" id="roll2" value=""><br/>
+Name:<input type="text" name="name" id="name2" value=""><br/>
+Email:<input type="email" name="email" id="email2" value=""><br/>
+Password:<input type="password" name="password" id="pass2" value=""><br/>
+Year:<input type="text" name="year" id="year2" value=""><br/>
+CGPA:<input type="text" name="CGPA" id="cgpa2" value=""><br/>
+Course_priority1:<select id="lcourses1" name="Course_priority1"></select><br/>
+Course_priority2:<select id="lcourses2" name="Course_priority2"></select><br/>
+Course_priority3:<select id="lcourses3" name="Course_priority3"></select><br/>
+<button type="button" id="button3">Submit</button>
+</form>
+</div>
+<div id="register_faculty" class="hidden">
+<form>
+Name:<input type="text" name="name" id="name3" value=""><br/>
+Email:<input type="email" name="email" id="email3" value=""><br/>
+Password:<input type="password" name="password" id="pass3" value=""><br/>
+Faculty_id:<input type="text" name="Faculty_id" id="fac_id3" value=""><br/>
+Course_id:<input type="text" name="Course_id" id="cou_id3" value=""><br/>
+Course_name:<input type="text" name="Course_name" id="cou_name3" value=""><br/>
+<button type="submit" id="button4">Submit</button>
+</form>
+</div>	
+<div id="student_profile" class="hidden">
+<form>
+Name:<p id="name"></p><br/>
+Roll:<p id="roll"></p><br/>
+Year:<p id="year"></p><br/>
+Status:<br/>
+<table id="table1">
+<thead> 
+<td>Course_priority</td>
+<td>Course</td>
+<td>Status</td>
+<td></td>
+<td></td>
+<td></td>
+</thead>
+<tr>
+<td>1</td>
+<td id="priorty1"></td>
+<td id="status1">not_nominated</td>	
+<td><button type="button" id="btn1" disabled="true">drop</button></td>	
+<td><button type="button" id="btn2" disabled="true">lock</button></td>
+<td><button type="button" id="btn3" disabled="true">wait</button></td>
+</tr>
+<tr>
+<td>2</td>
+<td id="priorty2"></td>
+<td id="status2">not_nominated</td>	
+<td><button type="button" id="btn1" disabled="true">drop</button></td>	
+<td><button type="button" id="btn2" disabled="true">lock</button></td>
+<td><button type="button" id="btn3" disabled="true">wait</button></td>	
+</tr>
+<tr>
+<td>3</td>
+<td id="priorty3"></td>
+<td id="status3">not_nominated</td>	
+<td><button type="button" id="btn1" disabled="true">drop</button></td>	
+<td><button type="button" id="btn2" disabled="true">lock</button></td>
+<td><button type="button" id="btn3" disabled="true">wait</button></td>
+</tr>
+</table>
+</form>
+</div>
+<div id="faculty_profile" class="hidden">
+<form>
+Name:<p id="name4"></p><br/>
+Faculty_id:<p id="fac_id4"></p><br/>
+Course_id:<p id="cou_id4"></p><br/>
+Course_name:<p id="cou_name4"></p><br/>
+List of Students taking Course:<br/>
+<p id="dataS"></p>
+</form>
+<script type="text/javascript">
+function hide_all_containers(){
+	console.log("hide_all_containers");
+	$('#loginform').addClass("hidden");
+	$('#register_student').addClass("hidden");
+	$('#register_faculty').addClass("hidden");
+	$('#student_profile').addClass("hidden");
+};
+var fun1=function(){
+	window.location.hash='StudentProfile';
+}
+var fun2a=function(){
+	window.location.hash='register_Student';
+}
+var fun2b=function(){
+	window.location.hash='register_Faculty'
+}
+var fun3=function(){
+	window.location.hash='StudentProfile';
+}
+var fun4=function(){
+	window.location.hash='FacultyProfile';
+}
+function get_window_hash_path() {
+  return location.hash.substring(1);
+};
+function navigate(path){
+	var current=window.location.href;
+	window.location.href = current.replace(/#(.*)$/,'')+'#' + path;
+};
+function register_onhashchange_handlers(handler_functions){
+	$(window).on("hashchange",function(e){
+		hash_path = get_window_hash_path();
+		console.log("new hash: ",hash_path);
+		if(handler_functions.hasOwnProperty(hash_path)){
+		handler_functions[hash_path]();	
+		}
+		else{
+			console.warn('no handler for ${hash_path}');
+		}
+	});
+};
+window.onload = function(){
+	register_onhashchange_handlers({
+		index:login_handler,
+		register_Student:register_Student_handler,
+		register_Faculty:register_Faculty_handler,
+		StudentProfile:student_profile_handler,
+		FacultyProfile:faculty_profile_handler,
+	})
+	let current_hash = get_window_hash_path();
+    if(current_hash===""){
+	    current_hash="index";
+	    navigate(current_hash);
+    }
+}
+function login_handler(){
+	hide_all_containers();
+	$("#loginform").removeClass("hidden");
+	$("#loginform #button1")[0].addEventListener("click",fun1)
+	$("#loginform #button2a")[0].addEventListener("click",fun2a)
+	$("#loginform #button2b")[0].addEventListener("click",fun2b)
+}
+function register_Student_handler(){
+	hide_all_containers();
+	$('#register_student').removeClass("hidden")
+	console.log('awfbbesg');
+	courses();
+	$('#button3')[0].addEventListener("click",back1)
+}
+function register_Faculty_handler(){
+	hide_all_containers();
+	$('#register_faculty').removeClass("hidden")
+	$('#button4')[0].addEventListener("click",back2)
+}
+function student_profile_handler(){
+	var email_t=$("#loginform #email1").val();
+	var pass_t=$("#loginform #pass1").val();
+	console.log(email_t);
+	hide_all_containers();
+	$("#student_profile").removeClass("hidden");
+	displayStudent(email_t,pass_t);
+}
+var displayStudent=function(email_t,pass_t){
+	$.post('http://127.0.0.1:5050/loginstudent',{email: email_t,password: pass_t},function(response){
+		//if(response='fail')
+	//	{
+	//		window.location.href='index'
+	//		alert('Invalid Credentials');
+	//		console.log(response);
+	//	}
+	//	else
+	//	{
+			console.log(1);
+			console.log(response);
+			var arr=response;
+			$("#student_profile #name").html()=arr.name
+			$("#student_profile #roll").html()=arr.roll
+			$("#student_profile #year").html()=arr.year
+			$("#student_profile #table1 #priorty1").html()=arr.Course_priority1
+			$("#student_profile #table1 #priorty2").html()=arr.Course_priority2
+			$("#student_profile #table1 #priorty3").html()=arr.Course_priority3
+	//	}
+		}).fail(function(){
+		window.location.hash="index";
+		alert('Error!!!');
+		console.log('error');
+	})
+}
+function faculty_profile_handler(){
+	var email_t=$("#loginform #email1").value()
+	hide_all_containers();
+	$("#faculty_profile").removeClass("hidden");
+	var displayFaculty=function(){
+	$.ajax({
+		url:'http://127.0.0.1:5050/course_faculty',
+		method:'GET',
+		data: {},
+		success: function(response)
+		{	
+			var arr=response.faculty;
+			var i;
+			for(i=0;i<arr.length;i++)
+			{
+				if(email_t==arr[i].email)
+				{
+					
+					$("#faculty_profile #name4").html()=arr[i].name;
+					$("#faculty_profile #fac_id4").html()=arr[i].Faculty_id;
+					$("#faculty_profile #cou_id4").html()=arr[i].Course_id;
+					$("#faculty_profile #cou_name4").html()=arr[i].Course_name;
+				}
+			}
+		}
+	})
+
+}
+}
+
+var courses=function() {
+	var arr=["ITWS2","DS","MATHS2","BEC","CSO","HSS"];
+	var n=arr.length;
+	var i;
+	var str="<option>"+"select a course"+"</option>"
+	for(i=0;i<n;i++)
+	{
+		str=str+"<option value=" + arr[i] + ">" + arr[i] + "</option>"
+	}
+	document.getElementById("lcourses1").innerHTML=str
+	document.getElementById("lcourses2").innerHTML=str
+	document.getElementById("lcourses3").innerHTML=str
+	
+};
+
+$.ajaxSetup({async: false});
+var back1=function(){
+	var ret=false;
+	console.log("1234");
+	$.post('http://127.0.0.1:5050/addStudent',{roll:$("#roll2").val(),
+			name:$("#name2").val(),
+			email:$("#email2").val(),
+			password:$("#pass2").val(),
+			year:$("#year2").val(),
+			CGPA:$("#cgpa2").val(),
+			Course_priority1:$("#lcourses1").find(":selected").text(),
+			Course_priority2:$("#lcourses2").find(":selected").text(),
+			Course_priority3:$("#lcourses3").find(":selected").text()},function(data){
+				alert('data');
+				console.log('data');
+			}).fail(function(){
+				alert('Error!!!');
+			});
+			return ret;
+
+};
+$.ajaxSetup({async: false});
+var back2=function(){
+	var ret=false;
+	console.log(123456);
+	$.post('http://127.0.0.1:5050/addFaculty',{name:$("#name3").val(),
+			email:$("#email3").val(),
+			password:$("#pass3").val(),
+			Faculty_id:$("#fac_id3").val(),
+			Course_id:$("#cou_id3").val(),
+			Course_name:$("#cou_name3").val()},function(data){
+				alert('data');
+				console.log('data');
+			}).fail(function(data)
+			{
+				alert('Error!!!');
+				console.log('data');
+			});
+			return ret;
+}
+</script>
+</div>
+</body>
+</html>

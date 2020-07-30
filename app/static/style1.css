@@ -1,0 +1,249 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	line-height: 1.42em;
+color:#A7A1AE;
+      background-color:#1F2739;
+}
+
+h1 {
+	font-size:3em; 
+	font-weight: 300;
+	line-height:1em;
+	text-align: center;
+color: #4DC3FA;
+}
+
+h2 {
+	font-size:2em; 
+	font-weight: 300;
+	text-align: center;
+display: block;
+	 line-height:1em;
+	 padding-bottom: 2em;
+color: #FB667A;
+}
+
+h2 a {
+	font-weight: 500;
+	text-transform: uppercase;
+color: #FB667A;
+       text-decoration: none;
+}
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+.container th h1 {
+	font-weight: bold;
+	font-size: 1em;
+	text-align: left;
+color: #185875;
+}
+
+.container td {
+	font-weight: normal;
+	font-size: 1em;
+	-webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	-moz-box-shadow: 0 2px 2px -2px #0E1119;
+	box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	text-align: left;
+overflow: hidden;
+width: 100%;
+margin: 0 auto;
+display: table;
+padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	padding-bottom: 2%;
+	padding-top: 2%;
+	padding-left:2%;  
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+	background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+	background-color: #2C3446;
+}
+
+.container th {
+	background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
+
+.container tr:hover {
+	background-color: #464A52;
+	-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	-moz-box-shadow: 0 6px 6px -6px #0E1119;
+	box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+	background-color: #FFF842;
+color: #403E10;
+       font-weight: bold;
+
+       box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+transform: translate3d(6px, -6px, 0);
+
+	   transition-delay: 0s;
+	   transition-duration: 0.4s;
+	   transition-property: all;
+	   transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+	.container td:nth-child(4),
+		.container th:nth-child(4) { display: none; }
+}
+
+
+.login-page111 {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form111 {
+  position: relative;
+  z-index: 1;
+ /* ^ background: #FFFFFF;*/
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form111 input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form111 button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form111 button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form111 .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form111 .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form111 .register-form111 {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+/*
+body {
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
